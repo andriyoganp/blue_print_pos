@@ -15,8 +15,8 @@ class BlueScanner {
       devices = resultDevices
           .map(
             (blue_thermal.BluetoothDevice bluetoothDevice) => BlueDevice(
-              name: bluetoothDevice.name,
-              address: bluetoothDevice.address,
+              name: bluetoothDevice.name ?? '',
+              address: bluetoothDevice.address ?? '',
               type: bluetoothDevice.type,
             ),
           )
