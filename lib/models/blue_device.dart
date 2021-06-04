@@ -1,7 +1,7 @@
 class BlueDevice {
   BlueDevice({
-    this.name,
-    this.address,
+    required this.name,
+    required this.address,
     this.connected = false,
     this.type = 0,
   });
