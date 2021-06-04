@@ -9,10 +9,11 @@ import 'package:blue_print_pos/scanner/blue_scanner.dart';
 import 'package:esc_pos_utils_plus/esc_pos_utils.dart';
 import 'package:flutter_blue/flutter_blue.dart' as flutter_blue;
 import 'package:flutter_blue/gen/flutterblue.pb.dart' as proto;
-import 'package:blue_thermal_printer/blue_thermal_printer.dart'
-    as blue_thermal;
+import 'package:blue_thermal_printer/blue_thermal_printer.dart' as blue_thermal;
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:image/image.dart' as img;
+
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:webcontent_converter/webcontent_converter.dart';
 
 class BluePrintPos {
@@ -21,53 +22,54 @@ class BluePrintPos {
     _bluetoothIOS = flutter_blue.FlutterBlue.instance;
   }
 
-  blue_thermal.BlueThermalPrinter _bluetoothAndroid;
-  flutter_blue.FlutterBlue _bluetoothIOS;
-  flutter_blue.BluetoothDevice _bluetoothDeviceIOS;
+  blue_thermal.BlueThermalPrinter? _bluetoothAndroid;
+  flutter_blue.FlutterBlue? _bluetoothIOS;
+  flutter_blue.BluetoothDevice? _bluetoothDeviceIOS;
   bool isConnected = false;
-  BlueDevice selectedDevice;
+  BlueDevice? selectedDevice;
 
   Future<List<BlueDevice>> scan() async {
     return await BlueScanner.scan();
   }
 
-  Future<ConnectionStatus> connect(BlueDevice device,
-      {Duration timeout = const Duration(
-        seconds: 5,
-      )}) async {
+  Future<ConnectionStatus> connect(
+    BlueDevice device, {
+    Duration timeout = const Duration(seconds: 5),
+  }) async {
     selectedDevice = device;
     try {
       if (Platform.isAndroid) {
         final blue_thermal.BluetoothDevice bluetoothDeviceAndroid =
             blue_thermal.BluetoothDevice(
-                selectedDevice.name, selectedDevice.address);
-        await _bluetoothAndroid.connect(bluetoothDeviceAndroid);
+                selectedDevice?.name ?? '', selectedDevice?.address ?? '');
+        await _bluetoothAndroid?.connect(bluetoothDeviceAndroid);
       } else if (Platform.isIOS) {
         _bluetoothDeviceIOS = flutter_blue.BluetoothDevice.fromProto(
           proto.BluetoothDevice(
-            name: selectedDevice.name,
-            remoteId: selectedDevice.address,
-            type: proto.BluetoothDevice_Type.valueOf(selectedDevice.type),
+            name: selectedDevice?.name ?? '',
+            remoteId: selectedDevice?.address ?? '',
+            type: proto.BluetoothDevice_Type.valueOf(selectedDevice?.type ?? 0),
           ),
         );
         final List<flutter_blue.BluetoothDevice> connectedDevices =
-            await _bluetoothIOS.connectedDevices;
+            await _bluetoothIOS?.connectedDevices ??
+                <flutter_blue.BluetoothDevice>[];
         final int deviceConnectedIndex = connectedDevices
-            ?.indexWhere((flutter_blue.BluetoothDevice bluetoothDevice) {
-          return bluetoothDevice.id == _bluetoothDeviceIOS.id;
+            .indexWhere((flutter_blue.BluetoothDevice bluetoothDevice) {
+          return bluetoothDevice.id == _bluetoothDeviceIOS?.id;
         });
         if (deviceConnectedIndex < 0) {
-          await _bluetoothDeviceIOS.connect();
+          await _bluetoothDeviceIOS?.connect();
         }
       }
 
       isConnected = true;
-      selectedDevice.connected = true;
+      selectedDevice?.connected = true;
       return Future<ConnectionStatus>.value(ConnectionStatus.connected);
     } on Exception catch (error) {
-      print('Exception $error');
+      print('$runtimeType - Error $error');
       isConnected = false;
-      selectedDevice.connected = false;
+      selectedDevice?.connected = false;
       return Future<ConnectionStatus>.value(ConnectionStatus.timeout);
     }
   }
@@ -76,10 +78,10 @@ class BluePrintPos {
     Duration timeout = const Duration(seconds: 5),
   }) async {
     if (Platform.isAndroid) {
-      await _bluetoothAndroid.disconnect();
+      await _bluetoothAndroid?.disconnect();
       isConnected = false;
     } else if (Platform.isIOS) {
-      await _bluetoothDeviceIOS.disconnect();
+      await _bluetoothDeviceIOS?.disconnect();
       isConnected = false;
     }
 
@@ -123,7 +125,7 @@ class BluePrintPos {
     int feedCount = 0,
     bool useCut = false,
   }) async {
-    final List<int> byteBuffer = await _getQRImage(text, size: size.toDouble());
+    final List<int> byteBuffer = await _getQRImage(text, size.toDouble());
     printReceiptImage(
       byteBuffer,
       width: size,
@@ -135,17 +137,18 @@ class BluePrintPos {
   Future<void> _printProcess(List<int> byteBuffer) async {
     try {
       if (selectedDevice == null) {
-        print('Device not selected');
+        print('$runtimeType - Device not selected');
         return Future<void>.value(null);
       }
-      if (!isConnected) {
-        await connect(selectedDevice);
+      if (!isConnected && selectedDevice != null) {
+        await connect(selectedDevice!);
       }
       if (Platform.isAndroid) {
-        _bluetoothAndroid.writeBytes(Uint8List.fromList(byteBuffer));
+        _bluetoothAndroid?.writeBytes(Uint8List.fromList(byteBuffer));
       } else if (Platform.isIOS) {
         final List<flutter_blue.BluetoothService> bluetoothServices =
-            await _bluetoothDeviceIOS.discoverServices();
+            await _bluetoothDeviceIOS?.discoverServices() ??
+                <flutter_blue.BluetoothService>[];
         final flutter_blue.BluetoothService bluetoothService =
             bluetoothServices.firstWhere(
           (flutter_blue.BluetoothService service) => service.isPrimary,
@@ -155,17 +158,17 @@ class BluePrintPos {
           (flutter_blue.BluetoothCharacteristic bluetoothCharacteristic) =>
               bluetoothCharacteristic.properties.write,
         );
-        await characteristic?.write(byteBuffer, withoutResponse: true);
+        await characteristic.write(byteBuffer, withoutResponse: true);
       }
     } on Exception catch (error) {
-      print('Error : $error');
+      print('$runtimeType - Error $error');
     }
   }
 
   Future<List<int>> _getBytes(
     List<int> data, {
     PaperSize paperSize = PaperSize.mm58,
-    int customWidth,
+    int customWidth = 0,
     int feedCount = 0,
     bool useCut = false,
   }) async {
@@ -173,8 +176,8 @@ class BluePrintPos {
     final CapabilityProfile profile = await CapabilityProfile.load();
     final Generator generator = Generator(PaperSize.mm58, profile);
     final img.Image _resize = img.copyResize(
-      img.decodeImage(data),
-      width: customWidth ?? paperSize.width,
+      img.decodeImage(data)!,
+      width: customWidth > 0 ? customWidth : paperSize.width,
     );
     bytes += generator.image(_resize);
     if (feedCount > 0) {
@@ -186,7 +189,7 @@ class BluePrintPos {
     return bytes;
   }
 
-  Future<Uint8List> _getQRImage(String text, {double size}) async {
+  Future<Uint8List> _getQRImage(String text, double size) async {
     try {
       final Image image = await QrPainter(
         data: text,
@@ -195,8 +198,10 @@ class BluePrintPos {
         color: const Color(0xFF000000),
         emptyColor: const Color(0xFFFFFFFF),
       ).toImage(size);
-      final ByteData a = await image.toByteData(format: ImageByteFormat.png);
-      return a.buffer.asUint8List();
+      final ByteData? byteData =
+          await image.toByteData(format: ImageByteFormat.png);
+      assert(byteData != null);
+      return byteData!.buffer.asUint8List();
     } on Exception catch (exception) {
       print('$runtimeType - $exception');
       rethrow;
