@@ -1,7 +1,6 @@
 import 'package:blue_print_pos/blue_print_pos.dart';
 import 'package:blue_print_pos/models/models.dart';
-import 'package:blue_print_pos/receipt/receipt_section_text.dart';
-import 'package:blue_print_pos/receipt/receipt_text_style.dart';
+import 'package:blue_print_pos/receipt/receipt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -16,18 +15,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  BluePrintPos _bluePrintPos;
+  final BluePrintPos _bluePrintPos = BluePrintPos.instance;
   List<BlueDevice> _blueDevices = <BlueDevice>[];
   BlueDevice _selectedDevice;
   bool _isLoading = false;
-
-  @override
-  void initState() {
-    super.initState();
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      _bluePrintPos = BluePrintPos();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

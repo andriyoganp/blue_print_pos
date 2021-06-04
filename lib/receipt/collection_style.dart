@@ -1,6 +1,7 @@
 class CollectionStyle {
   CollectionStyle._();
 
+  /// Getter for all css style pre-define
   static String get all {
     return '''
       <style>
@@ -55,11 +56,6 @@ class CollectionStyle {
               float: left;
           }
           
-          .total {
-              font-size: 2.5em;
-              margin: 5px;
-          }
-          
           span {
               color: black;
               font-family: helvetica;
@@ -92,6 +88,7 @@ class CollectionStyle {
     ''';
   }
 
+  /// To separate style from all css, just create getter the value of style name
   static String get textCenter => 'text-center';
   static String get textLeft => 'text-left';
   static String get textRight => 'text-right';
