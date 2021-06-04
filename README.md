@@ -4,14 +4,19 @@ This plugin to help use bluetooth printer in Android/iOS. Support for text, imag
 line dashed and QR. 
 
 ## Usage
+### Initialize
+```dart
+BluePrintPos bluePrintPos = BluePrintPos.instance; 
+```
+
 ### Scan bluetooth printer
 ```dart
-_bluePrintPos.scan();
+bluePrintPos.scan();
 ```
 
 ### Connect bluetooth printer
 ```dart
-_bluePrintPos.connect(device);
+bluePrintPos.connect(device);
 ```
 
 ### Print Text
@@ -29,7 +34,7 @@ receiptText.addLeftRightText('Time', '04/06/21, 10:00');
 ### Print image
 ```dart
 ByteData bytes = await rootBundle.load('assets/logo.jpg');
-await _bluePrintPos.printReceiptImage(bytes.buffer.asUint8List(), width: 120);
+await bluePrintPos.printReceiptImage(bytes.buffer.asUint8List(), width: 120);
 ```
 
 ### Add new line
