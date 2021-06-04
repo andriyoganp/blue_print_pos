@@ -83,6 +83,7 @@ Reference and dependencies create this plugin
 - [esc_pos_utils](https://pub.dev/packages/esc_pos_utils)
 - [esc_pos_utils_plus](https://pub.dev/packages/esc_pos_utils_plus)
 - [flutter_blue](https://pub.dev/packages/flutter_blue)
+- [image](https://pub.dev/packages/image)
 - [qr_flutter](https://pub.dev/packages/qr_flutter)
 - [webcontent_converter](https://pub.dev/packages/webcontent_converter/score)
 

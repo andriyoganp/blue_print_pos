@@ -17,6 +17,8 @@ dependencies:
     sdk: flutter
   # Handler bluetooth for iOS
   flutter_blue: ^0.8.0
+  # Image utilities
+  image: ^3.0.2
   # Generate qr image painter
   qr_flutter: ^4.0.0
   # Convert image to ByteBuffer

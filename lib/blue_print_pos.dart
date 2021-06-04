@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:blue_print_pos/models/connection_status.dart';
+import 'package:blue_print_pos/models/models.dart';
 import 'package:blue_print_pos/receipt/receipt_section_text.dart';
 import 'package:blue_print_pos/scanner/blue_scanner.dart';
 import 'package:esc_pos_utils_plus/esc_pos_utils.dart';
@@ -11,10 +12,8 @@ import 'package:flutter_blue/gen/flutterblue.pb.dart' as proto;
 import 'package:blue_thermal_printer/blue_thermal_printer.dart'
     as blue_thermal;
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:webcontent_converter/webcontent_converter.dart';
 import 'package:image/image.dart' as img;
-
-import 'models/models.dart';
+import 'package:webcontent_converter/webcontent_converter.dart';
 
 class BluePrintPos {
   BluePrintPos() {
