@@ -22,9 +22,7 @@ class BluePrintPos {
     _bluetoothIOS = flutter_blue.FlutterBlue.instance;
   }
 
-  static final BluePrintPos _instance = BluePrintPos._();
-
-  static BluePrintPos get instance => _instance;
+  static BluePrintPos get instance => BluePrintPos._();
 
   /// This field is library to handle in Android Platform
   blue_thermal.BlueThermalPrinter? _bluetoothAndroid;
