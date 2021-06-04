@@ -2,6 +2,7 @@ name: blue_print_pos
 description: Helper to use bluetooth print in Android and iOS
 version: 0.0.1
 author: Andri Yoga Nur Pratama<andriyoga.np@gmail.com>
+homepage: https://github.com/andriyoganp/blue_print_pos
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
