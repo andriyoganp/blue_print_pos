@@ -4,7 +4,11 @@ import 'package:blue_print_pos/models/blue_device.dart';
 import 'package:blue_thermal_printer/blue_thermal_printer.dart' as blue_thermal;
 import 'package:flutter_blue/flutter_blue.dart' as flutter_blue;
 
+/// This class with static method to handler scanning in Android and iOS
 class BlueScanner {
+  const BlueScanner._();
+
+  /// Provide list of bluetooth device, return as list of [BlueDevice]
   static Future<List<BlueDevice>> scan() async {
     List<BlueDevice> devices = <BlueDevice>[];
     if (Platform.isAndroid) {

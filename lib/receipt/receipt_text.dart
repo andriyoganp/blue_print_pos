@@ -1,6 +1,8 @@
-import 'package:blue_print_pos/receipt/collection_style.dart';
-import 'package:blue_print_pos/receipt/receipt_alignment.dart';
-import 'package:blue_print_pos/receipt/receipt_text_style.dart';
+import 'collection_style.dart';
+import 'receipt_alignment.dart';
+import 'receipt_text_size_type.dart';
+import 'receipt_text_style.dart';
+import 'receipt_text_style_type.dart';
 
 class ReceiptText {
   ReceiptText(

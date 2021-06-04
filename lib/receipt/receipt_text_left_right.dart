@@ -1,4 +1,5 @@
-import 'package:blue_print_pos/receipt/receipt_text_style.dart';
+import 'receipt_text_style.dart';
+import 'receipt_text_style_type.dart';
 
 class ReceiptTextLeftRight {
   ReceiptTextLeftRight(
@@ -21,8 +22,8 @@ class ReceiptTextLeftRight {
 
   String get html => '''
     <p class="full-width inline-block">
-      <${leftTextStyle.textStyleHTML} class="left">$leftText</${leftTextStyle.textStyleHTML}>
-      <${rightTextStyle.textStyleHTML} class="right">$rightText</${rightTextStyle.textStyleHTML}>
+      <${leftTextStyle.textStyleHTML} class="left ${leftTextStyle.textSizeHtml}">$leftText</${leftTextStyle.textStyleHTML}>
+      <${rightTextStyle.textStyleHTML} class="right ${rightTextStyle.textSizeHtml}">$rightText</${rightTextStyle.textStyleHTML}>
     </p>
   ''';
 }
