@@ -33,9 +33,6 @@ class BlueScanner {
 
       await bluetoothIOS.startScan(
         timeout: const Duration(seconds: 5),
-        withServices: <flutter_blue.Guid>[
-          flutter_blue.Guid('E7810A71-73AE-499D-8C15-FAA9AEF0C3F2')
-        ],
       );
       bluetoothIOS.scanResults
           .listen((List<flutter_blue.ScanResult> scanResults) {
