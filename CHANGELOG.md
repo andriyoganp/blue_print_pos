@@ -1,3 +1,7 @@
+## 0.0.4
+
+* Remove restriction service scanning iOS
+
 ## 0.0.3
 
 * Decrease text small size into 0.8em
