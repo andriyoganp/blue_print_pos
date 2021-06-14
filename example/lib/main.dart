@@ -251,11 +251,15 @@ class _MyAppState extends State<MyApp> {
     );
     receiptText.addSpacer(count: 2);
 
-    /// Example for print QR
-    receiptText.addQR('www.google.com', size: 250);
-    receiptText.addText('Powered by ayeee', size: ReceiptTextSizeType.small);
-    receiptText.addSpacer();
+    await _bluePrintPos.printReceiptText(receiptText);
 
-    await _bluePrintPos.printReceiptText(receiptText, feedCount: 1);
+    /// Example for print QR
+    await _bluePrintPos.printQR('www.google.com', size: 250);
+
+    /// Text after QR
+    final ReceiptSectionText receiptSecondText = ReceiptSectionText();
+    receiptSecondText.addText('Powered by ayeee', size: ReceiptTextSizeType.small);
+    receiptSecondText.addSpacer();
+    await _bluePrintPos.printReceiptText(receiptSecondText, feedCount: 1);
   }
 }
