@@ -33,8 +33,11 @@ receiptText.addLeftRightText('Time', '04/06/21, 10:00');
 
 ### Print image
 ```dart
-ByteData bytes = await rootBundle.load('assets/logo.jpg');
-await bluePrintPos.printReceiptImage(bytes.buffer.asUint8List(), width: 120);
+final ByteData logoBytes = await rootBundle.load('assets/logo.jpg');
+receiptText.addImage(
+  base64.encode(Uint8List.view(logoBytes.buffer)),
+  width: 150,
+);
 ```
 
 ### Add new line
