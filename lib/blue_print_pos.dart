@@ -98,7 +98,9 @@ class BluePrintPos {
     Duration timeout = const Duration(seconds: 5),
   }) async {
     if (Platform.isAndroid) {
-      await _bluetoothAndroid?.disconnect();
+      if (await _bluetoothAndroid?.isConnected ?? false) {
+        await _bluetoothAndroid?.disconnect();
+      }
       _isConnected = false;
     } else if (Platform.isIOS) {
       await _bluetoothDeviceIOS?.disconnect();
@@ -219,7 +221,7 @@ class BluePrintPos {
       img.decodeImage(data)!,
       width: customWidth > 0 ? customWidth : paperSize.width,
     );
-    bytes += generator.image(_resize);
+    bytes += generator.imageRaster(_resize);
     if (feedCount > 0) {
       bytes += generator.feed(feedCount);
     }

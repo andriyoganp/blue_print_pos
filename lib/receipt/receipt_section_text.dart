@@ -1,4 +1,6 @@
+
 import 'package:blue_print_pos/receipt/collection_style.dart';
+import 'package:blue_print_pos/receipt/receipt_image.dart';
 
 import 'receipt_alignment.dart';
 import 'receipt_line.dart';
@@ -99,5 +101,18 @@ ${CollectionStyle.all}
   void addSpacer({int count = 1, bool useDashed = false}) {
     final ReceiptLine line = ReceiptLine(count: count, useDashed: useDashed);
     _data += line.html;
+  }
+
+  void addImage(
+    String base64, {
+    int width = 120,
+    ReceiptAlignment alignment = ReceiptAlignment.center,
+  }) {
+    final ReceiptImage image = ReceiptImage(
+      base64,
+      width: width,
+      alignment: alignment,
+    );
+    _data += image.html;
   }
 }
