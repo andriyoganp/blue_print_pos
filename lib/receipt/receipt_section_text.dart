@@ -1,4 +1,10 @@
+import 'dart:convert';
+import 'dart:typed_data';
+import 'dart:ui';
+
 import 'package:blue_print_pos/receipt/collection_style.dart';
+import 'package:blue_print_pos/receipt/receipt_image.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 import 'receipt_alignment.dart';
 import 'receipt_line.dart';
@@ -99,5 +105,42 @@ ${CollectionStyle.all}
   void addSpacer({int count = 1, bool useDashed = false}) {
     final ReceiptLine line = ReceiptLine(count: count, useDashed: useDashed);
     _data += line.html;
+  }
+
+  void addImage(
+    String base64, {
+    int width = 120,
+    ReceiptAlignment alignment = ReceiptAlignment.center,
+  }) {
+    final ReceiptImage image = ReceiptImage(
+      base64,
+      width: width,
+      alignment: alignment,
+    );
+    _data += image.html;
+  }
+
+  Future<void> addQR(
+    String text, {
+    double size = 120,
+    ReceiptAlignment alignment = ReceiptAlignment.center,
+  }) async {
+    try {
+      final Image image = await QrPainter(
+        data: text,
+        version: QrVersions.auto,
+        gapless: false,
+        color: const Color(0xFF000000),
+        emptyColor: const Color(0xFFFFFFFF),
+      ).toImage(size);
+      final ByteData? byteData =
+          await image.toByteData(format: ImageByteFormat.png);
+      assert(byteData != null);
+      print('$runtimeType - ${base64.encode(Uint8List.view(byteData!.buffer))}');
+      addImage(base64.encode(Uint8List.view(byteData.buffer)));
+    } on Exception catch (exception) {
+      print('$runtimeType - $exception');
+      rethrow;
+    }
   }
 }
