@@ -1,3 +1,7 @@
+## 0.0.5
+
+* Generate bytes with image raster enhancement
+
 ## 0.0.4
 
 * Remove restriction service scanning iOS
