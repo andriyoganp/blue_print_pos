@@ -116,6 +116,7 @@ class BluePrintPos {
     ReceiptSectionText receiptSectionText, {
     int feedCount = 0,
     bool useCut = false,
+    bool useRaster = false,
   }) async {
     final Uint8List bytes = await WebcontentConverter.contentToImage(
         content: receiptSectionText.content);
@@ -124,6 +125,7 @@ class BluePrintPos {
       paperSize: PaperSize.mm58,
       feedCount: feedCount,
       useCut: useCut,
+      useRaster: useRaster,
     );
     _printProcess(byteBuffer);
   }
@@ -137,12 +139,14 @@ class BluePrintPos {
     int width = 120,
     int feedCount = 0,
     bool useCut = false,
+    bool useRaster = false,
   }) async {
     final List<int> byteBuffer = await _getBytes(
       bytes,
       customWidth: width,
       feedCount: feedCount,
       useCut: useCut,
+      useRaster: useRaster,
     );
     _printProcess(byteBuffer);
   }
