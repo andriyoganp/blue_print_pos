@@ -1,3 +1,7 @@
+## 0.0.7
+
+* Add parameter option to generate image as raster
+
 ## 0.0.6
 
 * Add [webcontent_converter](https://pub.dev/packages/webcontent_converter) in library to make 
