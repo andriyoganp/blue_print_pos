@@ -211,6 +211,7 @@ class BluePrintPos {
     int customWidth = 0,
     int feedCount = 0,
     bool useCut = false,
+    bool useRaster = false,
   }) async {
     List<int> bytes = <int>[];
     final CapabilityProfile profile = await CapabilityProfile.load();
@@ -219,7 +220,11 @@ class BluePrintPos {
       img.decodeImage(data)!,
       width: customWidth > 0 ? customWidth : paperSize.width,
     );
-    bytes += generator.imageRaster(_resize);
+    if (useRaster) {
+      bytes += generator.imageRaster(_resize);
+    } else {
+      bytes += generator.image(_resize);
+    }
     if (feedCount > 0) {
       bytes += generator.feed(feedCount);
     }
