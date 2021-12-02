@@ -6,15 +6,13 @@ import 'package:blue_print_pos/models/connection_status.dart';
 import 'package:blue_print_pos/models/models.dart';
 import 'package:blue_print_pos/receipt/receipt_section_text.dart';
 import 'package:blue_print_pos/scanner/blue_scanner.dart';
+import 'package:blue_print_pos/webcontent_converter/webcontent_converter.dart';
+import 'package:blue_thermal_printer/blue_thermal_printer.dart' as blue_thermal;
 import 'package:esc_pos_utils_plus/esc_pos_utils.dart';
 import 'package:flutter_blue/flutter_blue.dart' as flutter_blue;
 import 'package:flutter_blue/gen/flutterblue.pb.dart' as proto;
-import 'package:blue_thermal_printer/blue_thermal_printer.dart' as blue_thermal;
-import 'package:qr_flutter/qr_flutter.dart';
 import 'package:image/image.dart' as img;
-
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:webcontent_converter/webcontent_converter.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class BluePrintPos {
   BluePrintPos._() {

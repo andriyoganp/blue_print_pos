@@ -5,7 +5,6 @@ import 'package:blue_print_pos/blue_print_pos.dart';
 import 'package:blue_print_pos/models/models.dart';
 import 'package:blue_print_pos/receipt/receipt.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 
 void main() {
@@ -20,7 +19,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final BluePrintPos _bluePrintPos = BluePrintPos.instance;
   List<BlueDevice> _blueDevices = <BlueDevice>[];
-  BlueDevice _selectedDevice;
+  BlueDevice? _selectedDevice;
   bool _isLoading = false;
   int _loadingAtIndex = -1;
 
@@ -50,8 +49,7 @@ class _MyAppState extends State<MyApp> {
                                 Expanded(
                                   child: GestureDetector(
                                     onTap: _blueDevices[index].address ==
-                                                _selectedDevice?.address ??
-                                            ''
+                                            (_selectedDevice?.address ?? '')
                                         ? _onDisconnectDevice
                                         : () => _onSelectDevice(index),
                                     child: Padding(
@@ -93,16 +91,16 @@ class _MyAppState extends State<MyApp> {
                                   Container(
                                     height: 24.0,
                                     width: 24.0,
-                                    margin: EdgeInsets.only(right: 8.0),
-                                    child: CircularProgressIndicator(
+                                    margin: const EdgeInsets.only(right: 8.0),
+                                    child: const CircularProgressIndicator(
                                       valueColor: AlwaysStoppedAnimation<Color>(
-                                          Colors.blue),
+                                        Colors.blue,
+                                      ),
                                     ),
                                   ),
                                 if (!_isLoading &&
-                                        _blueDevices[index].address ==
-                                            _selectedDevice?.address ??
-                                    '')
+                                    _blueDevices[index].address ==
+                                        (_selectedDevice?.address ?? ''))
                                   TextButton(
                                     onPressed: _onPrintReceipt,
                                     child: Container(
@@ -126,7 +124,7 @@ class _MyAppState extends State<MyApp> {
                                                 .primary
                                                 .withOpacity(0.5);
                                           }
-                                          return null;
+                                          return Theme.of(context).primaryColor;
                                         },
                                       ),
                                     ),
@@ -258,7 +256,8 @@ class _MyAppState extends State<MyApp> {
 
     /// Text after QR
     final ReceiptSectionText receiptSecondText = ReceiptSectionText();
-    receiptSecondText.addText('Powered by ayeee', size: ReceiptTextSizeType.small);
+    receiptSecondText.addText('Powered by ayeee',
+        size: ReceiptTextSizeType.small);
     receiptSecondText.addSpacer();
     await _bluePrintPos.printReceiptText(receiptSecondText, feedCount: 1);
   }
