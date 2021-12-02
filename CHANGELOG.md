@@ -1,3 +1,8 @@
+## 0.0.6
+
+* Add [webcontent_converter](https://pub.dev/packages/webcontent_converter) in library to make 
+  compatible in nullsafety
+
 ## 0.0.5
 
 * Generate bytes with image raster enhancement
