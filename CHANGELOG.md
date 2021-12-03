@@ -1,3 +1,7 @@
+## 0.0.8
+
+* Add parameter option to generate image as raster
+
 ## 0.0.7
 
 * Add parameter option to generate image as raster

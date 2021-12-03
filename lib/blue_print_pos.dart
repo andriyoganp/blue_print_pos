@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
@@ -6,9 +7,9 @@ import 'package:blue_print_pos/models/connection_status.dart';
 import 'package:blue_print_pos/models/models.dart';
 import 'package:blue_print_pos/receipt/receipt_section_text.dart';
 import 'package:blue_print_pos/scanner/blue_scanner.dart';
-import 'package:blue_print_pos/webcontent_converter/webcontent_converter.dart';
 import 'package:blue_thermal_printer/blue_thermal_printer.dart' as blue_thermal;
 import 'package:esc_pos_utils_plus/esc_pos_utils.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart' as flutter_blue;
 import 'package:flutter_blue/gen/flutterblue.pb.dart' as proto;
 import 'package:image/image.dart' as img;
@@ -21,6 +22,8 @@ class BluePrintPos {
   }
 
   static BluePrintPos get instance => BluePrintPos._();
+
+  static const MethodChannel _channel = MethodChannel('blue_print_pos');
 
   /// This field is library to handle in Android Platform
   blue_thermal.BlueThermalPrinter? _bluetoothAndroid;
@@ -118,7 +121,7 @@ class BluePrintPos {
     bool useCut = false,
     bool useRaster = false,
   }) async {
-    final Uint8List bytes = await WebcontentConverter.contentToImage(
+    final Uint8List bytes = await contentToImage(
         content: receiptSectionText.content);
     final List<int> byteBuffer = await _getBytes(
       bytes,
@@ -257,5 +260,24 @@ class BluePrintPos {
       print('$runtimeType - $exception');
       rethrow;
     }
+  }
+
+  static Future<Uint8List> contentToImage({
+    required String content,
+    double duration = 2000,
+  }) async {
+    final Map<String, dynamic> arguments = <String, dynamic>{
+      'content': content,
+      'duration': duration
+    };
+    Uint8List results = Uint8List.fromList(<int>[]);
+    try {
+      results = await _channel.invokeMethod('contentToImage', arguments) ??
+          Uint8List.fromList(<int>[]);
+    } on Exception catch (e) {
+      log('[method:contentToImage]: $e');
+      throw Exception('Error: $e');
+    }
+    return results;
   }
 }

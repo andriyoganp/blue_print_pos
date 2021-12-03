@@ -1,6 +1,8 @@
 PODS:
   - blue_print_pos (0.0.1):
     - Flutter
+  - blue_thermal_printer (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - flutter_blue (0.0.1):
     - Flutter
@@ -9,14 +11,12 @@ PODS:
     - Flutter
     - Protobuf (~> 3.11.4)
   - Protobuf (3.11.4)
-  - webcontent_converter (0.0.1):
-    - Flutter
 
 DEPENDENCIES:
   - blue_print_pos (from `.symlinks/plugins/blue_print_pos/ios`)
+  - blue_thermal_printer (from `.symlinks/plugins/blue_thermal_printer/ios`)
   - Flutter (from `Flutter`)
   - flutter_blue (from `.symlinks/plugins/flutter_blue/ios`)
-  - webcontent_converter (from `.symlinks/plugins/webcontent_converter/ios`)
 
 SPEC REPOS:
   trunk:
@@ -25,20 +25,20 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   blue_print_pos:
     :path: ".symlinks/plugins/blue_print_pos/ios"
+  blue_thermal_printer:
+    :path: ".symlinks/plugins/blue_thermal_printer/ios"
   Flutter:
     :path: Flutter
   flutter_blue:
     :path: ".symlinks/plugins/flutter_blue/ios"
-  webcontent_converter:
-    :path: ".symlinks/plugins/webcontent_converter/ios"
 
 SPEC CHECKSUMS:
   blue_print_pos: 23e8b4bede0fc07cd75b3257783523ca332bf3cb
-  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  blue_thermal_printer: e0f989c1ba2cae289f6472ebae0a22611958f2bc
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   flutter_blue: eeb381dc4727a0954dede73515f683865494b370
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
-  webcontent_converter: baa47c5fc5a9e8d703897a0b128f969c58fd2c7f
 
 PODFILE CHECKSUM: 7368163408c647b7eb699d0d788ba6718e18fb8d
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.2
