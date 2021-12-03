@@ -38,103 +38,105 @@ class _MyAppState extends State<MyApp> {
                   ),
                 )
               : _blueDevices.isNotEmpty
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Column(
-                          children: List<Widget>.generate(_blueDevices.length,
-                              (int index) {
-                            return Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: _blueDevices[index].address ==
-                                            (_selectedDevice?.address ?? '')
-                                        ? _onDisconnectDevice
-                                        : () => _onSelectDevice(index),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            _blueDevices[index].name,
-                                            style: TextStyle(
-                                              color: _selectedDevice?.address ==
-                                                      _blueDevices[index]
-                                                          .address
-                                                  ? Colors.blue
-                                                  : Colors.black,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w500,
+                  ? SingleChildScrollView(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Column(
+                            children: List<Widget>.generate(_blueDevices.length,
+                                (int index) {
+                              return Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: _blueDevices[index].address ==
+                                              (_selectedDevice?.address ?? '')
+                                          ? _onDisconnectDevice
+                                          : () => _onSelectDevice(index),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              _blueDevices[index].name,
+                                              style: TextStyle(
+                                                color: _selectedDevice?.address ==
+                                                        _blueDevices[index]
+                                                            .address
+                                                    ? Colors.blue
+                                                    : Colors.black,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                             ),
-                                          ),
-                                          Text(
-                                            _blueDevices[index].address,
-                                            style: TextStyle(
-                                              color: _selectedDevice?.address ==
-                                                      _blueDevices[index]
-                                                          .address
-                                                  ? Colors.blueGrey
-                                                  : Colors.grey,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500,
+                                            Text(
+                                              _blueDevices[index].address,
+                                              style: TextStyle(
+                                                color: _selectedDevice?.address ==
+                                                        _blueDevices[index]
+                                                            .address
+                                                    ? Colors.blueGrey
+                                                    : Colors.grey,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                if (_loadingAtIndex == index && _isLoading)
-                                  Container(
-                                    height: 24.0,
-                                    width: 24.0,
-                                    margin: const EdgeInsets.only(right: 8.0),
-                                    child: const CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        Colors.blue,
+                                  if (_loadingAtIndex == index && _isLoading)
+                                    Container(
+                                      height: 24.0,
+                                      width: 24.0,
+                                      margin: const EdgeInsets.only(right: 8.0),
+                                      child: const CircularProgressIndicator(
+                                        valueColor: AlwaysStoppedAnimation<Color>(
+                                          Colors.blue,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                if (!_isLoading &&
-                                    _blueDevices[index].address ==
-                                        (_selectedDevice?.address ?? ''))
-                                  TextButton(
-                                    onPressed: _onPrintReceipt,
-                                    child: Container(
-                                      color: _selectedDevice == null
-                                          ? Colors.grey
-                                          : Colors.blue,
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: const Text(
-                                        'Test Print',
-                                        style: TextStyle(color: Colors.white),
+                                  if (!_isLoading &&
+                                      _blueDevices[index].address ==
+                                          (_selectedDevice?.address ?? ''))
+                                    TextButton(
+                                      onPressed: _onPrintReceipt,
+                                      child: Container(
+                                        color: _selectedDevice == null
+                                            ? Colors.grey
+                                            : Colors.blue,
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: const Text(
+                                          'Test Print',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
+                                      style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty
+                                            .resolveWith<Color>(
+                                          (Set<MaterialState> states) {
+                                            if (states.contains(
+                                                MaterialState.pressed)) {
+                                              return Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                                  .withOpacity(0.5);
+                                            }
+                                            return Theme.of(context).primaryColor;
+                                          },
+                                        ),
                                       ),
                                     ),
-                                    style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty
-                                          .resolveWith<Color>(
-                                        (Set<MaterialState> states) {
-                                          if (states.contains(
-                                              MaterialState.pressed)) {
-                                            return Theme.of(context)
-                                                .colorScheme
-                                                .primary
-                                                .withOpacity(0.5);
-                                          }
-                                          return Theme.of(context).primaryColor;
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                              ],
-                            );
-                          }),
-                        ),
-                      ],
-                    )
+                                ],
+                              );
+                            }),
+                          ),
+                        ],
+                      ),
+                  )
                   : Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
