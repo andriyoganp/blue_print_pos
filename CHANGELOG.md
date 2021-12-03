@@ -1,6 +1,6 @@
 ## 0.0.8
 
-* Add parameter option to generate image as raster
+* Add native code to convert content image
 
 ## 0.0.7
 
