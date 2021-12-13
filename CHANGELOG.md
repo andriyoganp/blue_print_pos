@@ -1,3 +1,8 @@
+## 0.0.9
+
+* Add parameter **duration** for delay
+* Add parameter **paperSize** to change paper width
+
 ## 0.0.8
 
 * Add native code to convert content image
