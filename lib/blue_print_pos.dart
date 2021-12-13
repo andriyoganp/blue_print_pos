@@ -120,9 +120,12 @@ class BluePrintPos {
     int feedCount = 0,
     bool useCut = false,
     bool useRaster = false,
+    double duration = 0,
   }) async {
     final Uint8List bytes = await contentToImage(
-        content: receiptSectionText.content);
+      content: receiptSectionText.content,
+      duration: duration,
+    );
     final List<int> byteBuffer = await _getBytes(
       bytes,
       paperSize: PaperSize.mm58,
@@ -222,7 +225,7 @@ class BluePrintPos {
   }) async {
     List<int> bytes = <int>[];
     final CapabilityProfile profile = await CapabilityProfile.load();
-    final Generator generator = Generator(PaperSize.mm58, profile);
+    final Generator generator = Generator(paperSize, profile);
     final img.Image _resize = img.copyResize(
       img.decodeImage(data)!,
       width: customWidth > 0 ? customWidth : paperSize.width,
@@ -264,7 +267,7 @@ class BluePrintPos {
 
   static Future<Uint8List> contentToImage({
     required String content,
-    double duration = 2000,
+    double duration = 0,
   }) async {
     final Map<String, dynamic> arguments = <String, dynamic>{
       'content': content,
