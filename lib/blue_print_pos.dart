@@ -121,6 +121,7 @@ class BluePrintPos {
     bool useCut = false,
     bool useRaster = false,
     double duration = 0,
+    PaperSize paperSize = PaperSize.mm58,
   }) async {
     final Uint8List bytes = await contentToImage(
       content: receiptSectionText.content,
@@ -146,6 +147,7 @@ class BluePrintPos {
     int feedCount = 0,
     bool useCut = false,
     bool useRaster = false,
+    PaperSize paperSize = PaperSize.mm58,
   }) async {
     final List<int> byteBuffer = await _getBytes(
       bytes,
@@ -153,6 +155,7 @@ class BluePrintPos {
       feedCount: feedCount,
       useCut: useCut,
       useRaster: useRaster,
+      paperSize: paperSize,
     );
     _printProcess(byteBuffer);
   }
