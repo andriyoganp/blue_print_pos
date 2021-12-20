@@ -1,3 +1,8 @@
+## 0.0.10
+
+* Set default duration delay in iOS
+* Remove max width in method **.addImage**
+
 ## 0.0.9
 
 * Add parameter **duration** for delay
