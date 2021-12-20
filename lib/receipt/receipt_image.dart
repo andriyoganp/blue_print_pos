@@ -14,7 +14,7 @@ class ReceiptImage {
 
   String get html => '''
     <div class="$_alignmentStyleHTML">
-      <img src ="data:image/png;base64,$data" width="$_widthMax"/>
+      <img src ="data:image/png;base64,$data" width="$width"/>
     </div>
     ''';
 
@@ -27,10 +27,4 @@ class ReceiptImage {
     return CollectionStyle.textCenter;
   }
 
-  int get _widthMax {
-    if (width > 300) {
-      return 300;
-    }
-    return width;
-  }
 }
