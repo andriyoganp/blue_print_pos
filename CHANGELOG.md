@@ -1,3 +1,7 @@
+## 0.0.11
+
+* Provide default value on duration, only Android
+
 ## 0.0.10
 
 * Set default duration delay in iOS
