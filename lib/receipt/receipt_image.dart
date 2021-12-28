@@ -26,5 +26,4 @@ class ReceiptImage {
     }
     return CollectionStyle.textCenter;
   }
-
 }
