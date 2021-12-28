@@ -2,25 +2,21 @@ package com.ayeee.blue_print_pos
 
 import android.app.Activity
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
-import android.view.View
 import android.view.WindowInsets
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.annotation.NonNull
+import com.ayeee.blue_print_pos.extension.toBitmap
+import com.ayeee.blue_print_pos.extension.toByteArray
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
-import io.flutter.plugin.common.MethodChannel.Result
-import java.io.ByteArrayOutputStream
-import kotlin.math.absoluteValue
 
 /** BluePrintPosPlugin */
 class BluePrintPosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
@@ -137,25 +133,5 @@ class BluePrintPosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
-    }
-}
-
-fun WebView.toBitmap(offsetWidth: Double, offsetHeight: Double): Bitmap? {
-    if (offsetHeight > 0 && offsetWidth > 0) {
-        val width = (offsetWidth * this.resources.displayMetrics.density).absoluteValue.toInt()
-        val height = (offsetHeight * this.resources.displayMetrics.density).absoluteValue.toInt()
-        this.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED))
-        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        this.draw(canvas)
-        return bitmap
-    }
-    return null
-}
-
-fun Bitmap.toByteArray(): ByteArray {
-    ByteArrayOutputStream().apply {
-        compress(Bitmap.CompressFormat.PNG, 100, this)
-        return toByteArray()
     }
 }
