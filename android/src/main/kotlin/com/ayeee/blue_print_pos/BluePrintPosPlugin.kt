@@ -102,7 +102,7 @@ class BluePrintPosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                                 }
                             }
                         }
-                    }, duration!!.toLong())
+                    }, (duration ?: 0.0).toLong())
                 }
             }
         } else {
