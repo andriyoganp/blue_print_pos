@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
                 )
               : _blueDevices.isNotEmpty
                   ? SingleChildScrollView(
-                    child: Column(
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Column(
@@ -62,11 +62,12 @@ class _MyAppState extends State<MyApp> {
                                             Text(
                                               _blueDevices[index].name,
                                               style: TextStyle(
-                                                color: _selectedDevice?.address ==
-                                                        _blueDevices[index]
-                                                            .address
-                                                    ? Colors.blue
-                                                    : Colors.black,
+                                                color:
+                                                    _selectedDevice?.address ==
+                                                            _blueDevices[index]
+                                                                .address
+                                                        ? Colors.blue
+                                                        : Colors.black,
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w500,
                                               ),
@@ -74,11 +75,12 @@ class _MyAppState extends State<MyApp> {
                                             Text(
                                               _blueDevices[index].address,
                                               style: TextStyle(
-                                                color: _selectedDevice?.address ==
-                                                        _blueDevices[index]
-                                                            .address
-                                                    ? Colors.blueGrey
-                                                    : Colors.grey,
+                                                color:
+                                                    _selectedDevice?.address ==
+                                                            _blueDevices[index]
+                                                                .address
+                                                        ? Colors.blueGrey
+                                                        : Colors.grey,
                                                 fontSize: 14,
                                                 fontWeight: FontWeight.w500,
                                               ),
@@ -94,7 +96,8 @@ class _MyAppState extends State<MyApp> {
                                       width: 24.0,
                                       margin: const EdgeInsets.only(right: 8.0),
                                       child: const CircularProgressIndicator(
-                                        valueColor: AlwaysStoppedAnimation<Color>(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
                                           Colors.blue,
                                         ),
                                       ),
@@ -125,7 +128,8 @@ class _MyAppState extends State<MyApp> {
                                                   .primary
                                                   .withOpacity(0.5);
                                             }
-                                            return Theme.of(context).primaryColor;
+                                            return Theme.of(context)
+                                                .primaryColor;
                                           },
                                         ),
                                       ),
@@ -136,7 +140,7 @@ class _MyAppState extends State<MyApp> {
                           ),
                         ],
                       ),
-                  )
+                    )
                   : Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,

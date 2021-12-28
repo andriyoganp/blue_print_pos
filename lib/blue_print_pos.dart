@@ -272,7 +272,6 @@ class BluePrintPos {
     required String content,
     double duration = 0,
   }) async {
-
     final Map<String, dynamic> arguments = <String, dynamic>{
       'content': content,
       'duration': Platform.isIOS ? 2000 : duration,
