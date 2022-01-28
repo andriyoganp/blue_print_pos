@@ -1,3 +1,7 @@
+## 0.0.12
+
+* Fix fail build on Android
+
 ## 0.0.11
 
 * Provide default value on duration, only Android
