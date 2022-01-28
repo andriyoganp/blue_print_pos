@@ -21,7 +21,7 @@ packages:
       name: blue_thermal_printer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.8"
+    version: "1.2.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -136,7 +136,7 @@ packages:
       name: image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.8"
+    version: "3.1.1"
   matcher:
     dependency: transitive
     description:
@@ -178,7 +178,7 @@ packages:
       name: qr
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.1.0"
   qr_flutter:
     dependency: "direct main"
     description:
