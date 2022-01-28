@@ -41,7 +41,7 @@ class CollectionStyle {
           }
           
           .text-right {
-              text-align: left;
+              text-align: right;
           }
           
           .text-justify {
