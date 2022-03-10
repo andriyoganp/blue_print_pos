@@ -1,3 +1,10 @@
+## 0.0.13
+
+* Update to flutter SDK 2.10.3, dart 2.16
+* Change targetSDK to 32
+* Fix NumberFormatException because null or empty
+* Update log in debug only
+
 ## 0.0.12
 
 * Fix fail build on Android
