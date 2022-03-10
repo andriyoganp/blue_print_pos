@@ -50,15 +50,16 @@ class BluePrintPosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             val dHeight: Int
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 val windowMetrics = activity.windowManager.currentWindowMetrics
-                val insets = windowMetrics.windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
+                val insets =
+                    windowMetrics.windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
                 dWidth = windowMetrics.bounds.width() - insets.left - insets.right
                 dHeight = windowMetrics.bounds.height() - insets.bottom - insets.top
             } else {
                 dWidth = this.activity.window.windowManager.defaultDisplay.width
                 dHeight = this.activity.window.windowManager.defaultDisplay.height
             }
-            print("\ndwidth : $dWidth")
-            print("\ndheight : $dHeight")
+            Logger.log("\ndwidth : $dWidth")
+            Logger.log("\ndheight : $dHeight")
             webView.layout(0, 0, dWidth, dHeight)
             webView.loadDataWithBaseURL(null, content, "text/HTML", "UTF-8", null)
             webView.setInitialScale(1)
@@ -67,34 +68,35 @@ class BluePrintPosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             webView.settings.javaScriptCanOpenWindowsAutomatically = true
             webView.settings.loadWithOverviewMode = true
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                print("\n=======> enabled scrolled <=========")
+                Logger.log("\n=======> enabled scrolled <=========")
                 WebView.enableSlowWholeDocumentDraw()
             }
 
-            print("\n ///////////////// webview setted /////////////////")
+            Logger.log("\n ///////////////// webview setted /////////////////")
 
             webView.webViewClient = object : WebViewClient() {
                 override fun onPageFinished(view: WebView, url: String) {
                     super.onPageFinished(view, url)
 
                     Handler(Looper.getMainLooper()).postDelayed({
-                        print("\nOS Version: ${Build.VERSION.SDK_INT}")
-                        print("\n ================ webview completed ==============")
-                        print("\n scroll delayed ${webView.scrollBarFadeDuration}")
+                        Logger.log("\n ================ webview completed ==============")
+                        Logger.log("\n scroll delayed ${webView.scrollBarFadeDuration}")
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                             webView.evaluateJavascript("document.body.offsetWidth") { offsetWidth ->
                                 webView.evaluateJavascript("document.body.offsetHeight") { offsetHeight ->
-                                    print("\noffsetWidth : $offsetWidth")
-                                    print("\noffsetHeight : $offsetHeight")
-                                    val data = webView.toBitmap(
-                                        offsetWidth!!.toDouble(),
-                                        offsetHeight!!.toDouble()
-                                    )
-                                    if (data != null) {
-                                        val bytes = data.toByteArray()
-                                        result.success(bytes)
-                                        println("\n Got snapshot")
+                                    Logger.log("\noffsetWidth : $offsetWidth")
+                                    Logger.log("\noffsetHeight : $offsetHeight")
+                                    if (offsetWidth != null && offsetWidth.isNotEmpty() && offsetHeight != null && offsetHeight.isNotEmpty()) {
+                                        val data = webView.toBitmap(
+                                            offsetWidth.toDouble(),
+                                            offsetHeight.toDouble()
+                                        )
+                                        if (data != null) {
+                                            val bytes = data.toByteArray()
+                                            result.success(bytes)
+                                            Logger.log("\n Got snapshot")
+                                        }
                                     }
                                 }
                             }
@@ -108,7 +110,7 @@ class BluePrintPosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        print("onAttachedToActivity")
+        Logger.log("onAttachedToActivity")
         activity = binding.activity
         webView = WebView(activity.applicationContext)
         webView.minimumHeight = 1
@@ -116,20 +118,17 @@ class BluePrintPosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     }
 
     override fun onDetachedFromActivityForConfigChanges() {
-        // TODO: the Activity your plugin was attached to was destroyed to change configuration.
         // This call will be followed by onReattachedToActivityForConfigChanges().
-        print("onDetachedFromActivityForConfigChanges")
+        Logger.log("onDetachedFromActivityForConfigChanges")
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
-        // TODO: your plugin is now attached to a new Activity after a configuration change.
-        print("onAttachedToActivity")
+        Logger.log("onAttachedToActivity")
         onAttachedToActivity(binding)
     }
 
     override fun onDetachedFromActivity() {
-        // TODO: your plugin is no longer associated with an Activity. Clean up references.
-        print("onDetachedFromActivity")
+        Logger.log("onDetachedFromActivity")
     }
 
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
