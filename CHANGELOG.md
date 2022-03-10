@@ -4,6 +4,7 @@
 * Change targetSDK to 32
 * Fix NumberFormatException because null or empty
 * Update log in debug only
+* Fix CSS text-align in right
 
 ## 0.0.12
 
