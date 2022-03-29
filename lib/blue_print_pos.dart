@@ -128,7 +128,7 @@ class BluePrintPos {
     );
     final List<int> byteBuffer = await _getBytes(
       bytes,
-      paperSize: PaperSize.mm58,
+      paperSize: paperSize,
       feedCount: feedCount,
       useCut: useCut,
       useRaster: useRaster,
