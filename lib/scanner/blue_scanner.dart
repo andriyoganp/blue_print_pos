@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:blue_print_pos/models/blue_device.dart';
 import 'package:blue_thermal_printer/blue_thermal_printer.dart' as blue_thermal;
-import 'package:flutter_blue/flutter_blue.dart' as flutter_blue;
+import 'package:flutter_blue_plus/flutter_blue_plus.dart' as flutter_blue;
 
 /// This class with static method to handler scanning in Android and iOS
 class BlueScanner {
@@ -26,8 +26,8 @@ class BlueScanner {
           )
           .toList();
     } else if (Platform.isIOS) {
-      final flutter_blue.FlutterBlue bluetoothIOS =
-          flutter_blue.FlutterBlue.instance;
+      final flutter_blue.FlutterBluePlus bluetoothIOS =
+          flutter_blue.FlutterBluePlus.instance;
       final List<flutter_blue.BluetoothDevice> resultDevices =
           <flutter_blue.BluetoothDevice>[];
 
