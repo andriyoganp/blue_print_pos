@@ -1,3 +1,8 @@
+## 0.0.14
+
+* feat: change [flutter_blue](https://pub.dev/packages/flutter_blue) with [flutter_blue_plus](https://pub.dev/packages/flutter_blue_plus) ([!53](https://github.com/andriyoganp/blue_print_pos/pull/53))
+* fix: paper size print receipt text not pass bug ([#52](https://github.com/andriyoganp/blue_print_pos/pull/52))
+
 ## 0.0.13
 
 * Update to flutter SDK 2.10.3, dart 2.16
