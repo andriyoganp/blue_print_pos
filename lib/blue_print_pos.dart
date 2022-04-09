@@ -202,9 +202,14 @@ class BluePrintPos {
         );
         final flutter_blue.BluetoothCharacteristic characteristic =
             bluetoothService.characteristics.firstWhere(
-          (flutter_blue.BluetoothCharacteristic bluetoothCharacteristic) =>
-              bluetoothCharacteristic.properties.write,
-        );
+                (flutter_blue.BluetoothCharacteristic bluetoothCharacteristic) {
+          // write might no be found for low price printer
+          if (bluetoothCharacteristic.properties.write) {
+            return bluetoothCharacteristic.properties.write;
+          } else {
+            return bluetoothCharacteristic.properties.writeWithoutResponse;
+          }
+        });
         await characteristic.write(byteBuffer, withoutResponse: true);
       }
     } on Exception catch (error) {
