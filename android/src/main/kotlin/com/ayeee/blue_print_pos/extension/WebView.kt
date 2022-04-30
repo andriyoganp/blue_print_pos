@@ -8,8 +8,10 @@ import kotlin.math.absoluteValue
 
 fun WebView.toBitmap(offsetWidth: Double, offsetHeight: Double): Bitmap? {
     if (offsetHeight > 0 && offsetWidth > 0) {
-        val width = (offsetWidth * this.resources.displayMetrics.density).absoluteValue.toInt()
-        val height = (offsetHeight * this.resources.displayMetrics.density).absoluteValue.toInt()
+//         val width = (offsetWidth * this.resources.displayMetrics.density).absoluteValue.toInt()
+//         val height = (offsetHeight * this.resources.displayMetrics.density).absoluteValue.toInt()
+        val width = (offsetWidth * this.scale).absoluteValue.toInt()
+        val height = (offsetHeight * this.scale).absoluteValue.toInt()
         this.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED))
         val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
