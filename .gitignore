@@ -11,3 +11,10 @@ build/
 *.ipr
 *.iws
 .idea/
+example/ios/Podfile.lock
+example/ios/Runner.xcodeproj/project.pbxproj
+example/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme
+example/macos/Podfile
+example/macos/Flutter/GeneratedPluginRegistrant.swift
+example/macos/Flutter/ephemeral/flutter_export_environment.sh
+example/macos/Flutter/ephemeral/Flutter-Generated.xcconfig

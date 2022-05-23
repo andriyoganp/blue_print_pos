@@ -14,9 +14,11 @@ import 'package:flutter_blue_plus/gen/flutterblueplus.pb.dart' as proto;
 import 'package:image/image.dart' as img;
 import 'package:qr_flutter/qr_flutter.dart';
 
+//export 'package:blue_thermal_printer/blue_thermal_printer.dart';
+
 class BluePrintPos {
   BluePrintPos._() {
-    _bluetoothAndroid = blue_thermal.BlueThermalPrinter.instance;
+    bluetoothAndroid = blue_thermal.BlueThermalPrinter.instance;
     _bluetoothIOS = flutter_blue.FlutterBluePlus.instance;
   }
 
@@ -25,7 +27,7 @@ class BluePrintPos {
   static const MethodChannel _channel = MethodChannel('blue_print_pos');
 
   /// This field is library to handle in Android Platform
-  blue_thermal.BlueThermalPrinter? _bluetoothAndroid;
+  blue_thermal.BlueThermalPrinter? bluetoothAndroid;
 
   /// This field is library to handle in iOS Platform
   flutter_blue.FlutterBluePlus? _bluetoothIOS;
@@ -61,7 +63,7 @@ class BluePrintPos {
         final blue_thermal.BluetoothDevice bluetoothDeviceAndroid =
             blue_thermal.BluetoothDevice(
                 selectedDevice?.name ?? '', selectedDevice?.address ?? '');
-        await _bluetoothAndroid?.connect(bluetoothDeviceAndroid);
+        await bluetoothAndroid?.connect(bluetoothDeviceAndroid);
       } else if (Platform.isIOS) {
         _bluetoothDeviceIOS = flutter_blue.BluetoothDevice.fromProto(
           proto.BluetoothDevice(
@@ -98,8 +100,8 @@ class BluePrintPos {
     Duration timeout = const Duration(seconds: 5),
   }) async {
     if (Platform.isAndroid) {
-      if (await _bluetoothAndroid?.isConnected ?? false) {
-        await _bluetoothAndroid?.disconnect();
+      if (await bluetoothAndroid?.isConnected ?? false) {
+        await bluetoothAndroid?.disconnect();
       }
       _isConnected = false;
     } else if (Platform.isIOS) {
@@ -191,7 +193,7 @@ class BluePrintPos {
         await connect(selectedDevice!);
       }
       if (Platform.isAndroid) {
-        _bluetoothAndroid?.writeBytes(Uint8List.fromList(byteBuffer));
+        bluetoothAndroid?.writeBytes(Uint8List.fromList(byteBuffer));
       } else if (Platform.isIOS) {
         final List<flutter_blue.BluetoothService> bluetoothServices =
             await _bluetoothDeviceIOS?.discoverServices() ??
@@ -202,9 +204,14 @@ class BluePrintPos {
         );
         final flutter_blue.BluetoothCharacteristic characteristic =
             bluetoothService.characteristics.firstWhere(
-          (flutter_blue.BluetoothCharacteristic bluetoothCharacteristic) =>
-              bluetoothCharacteristic.properties.write,
-        );
+                (flutter_blue.BluetoothCharacteristic bluetoothCharacteristic) {
+          // write might no be found for low price printer
+          if (bluetoothCharacteristic.properties.write) {
+            return bluetoothCharacteristic.properties.write;
+          } else {
+            return bluetoothCharacteristic.properties.writeWithoutResponse;
+          }
+        });
         await characteristic.write(byteBuffer, withoutResponse: true);
       }
     } on Exception catch (error) {
