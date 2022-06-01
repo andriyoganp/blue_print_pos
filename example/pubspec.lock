@@ -14,21 +14,21 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.8.1"
+    version: "2.8.2"
   blue_print_pos:
     dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
-    version: "0.0.10"
+    version: "0.0.14"
   blue_thermal_printer:
     dependency: transitive
     description:
       name: blue_thermal_printer
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.8"
+    version: "1.2.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -42,7 +42,7 @@ packages:
       name: characters
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "1.2.0"
   charcode:
     dependency: transitive
     description:
@@ -111,13 +111,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_blue:
+  flutter_blue_plus:
     dependency: transitive
     description:
-      name: flutter_blue
+      name: flutter_blue_plus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.0"
+    version: "1.1.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -143,14 +143,21 @@ packages:
       name: image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.8"
+    version: "3.1.3"
   matcher:
     dependency: transitive
     description:
       name: matcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.10"
+    version: "0.12.11"
+  material_color_utilities:
+    dependency: transitive
+    description:
+      name: material_color_utilities
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.3"
   meta:
     dependency: transitive
     description:
@@ -185,7 +192,7 @@ packages:
       name: qr
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.1.0"
   qr_flutter:
     dependency: transitive
     description:
@@ -199,7 +206,7 @@ packages:
       name: rxdart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.26.0"
+    version: "0.27.3"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -246,7 +253,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.2"
+    version: "0.4.8"
   typed_data:
     dependency: transitive
     description:
@@ -260,7 +267,7 @@ packages:
       name: vector_math
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.1"
   xml:
     dependency: transitive
     description:
@@ -269,5 +276,5 @@ packages:
     source: hosted
     version: "5.1.1"
 sdks:
-  dart: ">=2.12.0 <3.0.0"
-  flutter: ">=1.20.0"
+  dart: ">=2.16.0 <3.0.0"
+  flutter: ">=2.5.0"
