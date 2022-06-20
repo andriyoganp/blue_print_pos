@@ -34,3 +34,7 @@ flutter:
         pluginClass: BluePrintPosPlugin
       ios:
         pluginClass: BluePrintPosPlugin
+      macos:
+        pluginClass: BluePrintPosPlugin
+      windows:
+        pluginClass: BluePrintPosPlugin
