@@ -11,6 +11,7 @@ import android.webkit.WebViewClient
 import androidx.annotation.NonNull
 import com.ayeee.blue_print_pos.extension.toBitmap
 import com.ayeee.blue_print_pos.extension.toByteArray
+import com.ayeee.blue_print_pos.kk
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -32,7 +33,7 @@ class BluePrintPosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         val viewID = "webview-view-type"
-        flutterPluginBinding.platformViewRegistry.registerViewFactory(viewID, FLNativeViewFactory())
+        flutterPluginBinding.platformViewRegistry.registerViewFactory(viewID, AndroidPlatformViewFactory())
 
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "blue_print_pos")
         channel.setMethodCallHandler(this)

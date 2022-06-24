@@ -11,3 +11,6 @@ build/
 *.ipr
 *.iws
 .idea/
+example/macos/Podfile
+example/macos/Flutter/Flutter-Debug.xcconfig
+example/macos/Flutter/Flutter-Release.xcconfig
