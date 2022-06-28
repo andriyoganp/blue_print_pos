@@ -6,7 +6,7 @@ abstract class BluePrintPosPlatform {
 
   static final Object _token = Object();
 
-  static BluePrintPosPlatform _instance = MethodChannelBluePrintPos();
+  static final BluePrintPosPlatform _instance = MethodChannelBluePrintPos();
 
   /// The default instance of [BluePrintPosPlatform] to use.
   ///
