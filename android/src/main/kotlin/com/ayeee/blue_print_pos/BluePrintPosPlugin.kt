@@ -19,8 +19,6 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 
-
-
 /** BluePrintPosPlugin */
 class BluePrintPosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     /// The MethodChannel that will the communication between Flutter and native Android
@@ -34,7 +32,7 @@ class BluePrintPosPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         val viewID = "webview-view-type"
-        flutterPluginBinding.platformViewRegistry.registerViewFactory(viewID, AndroidPlatformViewFactory())
+        flutterPluginBinding.platformViewRegistry.registerViewFactory(viewID, FLNativeViewFactory())
 
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "blue_print_pos")
         channel.setMethodCallHandler(this)
