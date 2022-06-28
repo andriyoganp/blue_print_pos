@@ -20,17 +20,6 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 
-public class AndroidPlatformViewFactory extends PlatformViewFactory {
-    public AndroidPlatformViewFactory() {
-        super(StandardMessageCodec.INSTANCE);
-    }
-
-    @NonNull
-    @Override
-    public PlatformView create(Context context, int viewId, @Nullable Object args) {
-        return new FLNativeView(context);
-    }
-}
 
 
 /** BluePrintPosPlugin */

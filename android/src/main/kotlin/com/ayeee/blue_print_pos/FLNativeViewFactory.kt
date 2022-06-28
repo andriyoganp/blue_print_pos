@@ -15,9 +15,9 @@ class FLNativeViewFactory : PlatformViewFactory(StandardMessageCodec.INSTANCE) {
 }
 
 
-internal class FLNativeView(context: Context, id: Int, creationParams: Map<String?, Any?>?) : PlatformView {
-    private val webView: WebView = WebView(context)
-    private var arguments: Map<String?, Any?>? = creationParams
+internal class FLNativeView(context: Context?, id: Int, creationParams: Map<String?, Any?>?) : PlatformView {
+    private lateinit val webView: WebView = WebView(context)
+    private lateinit var arguments: Map<String?, Any?>? = creationParams
 
     override fun getView(): View {
         return webView
@@ -26,6 +26,7 @@ internal class FLNativeView(context: Context, id: Int, creationParams: Map<Strin
     override fun dispose() {}
 
     init {
+        context?.let { ct ->
         var width = (arguments!!["width"]!! as Number).toInt()
         var height = (arguments!!["height"]!! as Number).toInt()
         var content = arguments!!["content"] as String
@@ -36,7 +37,7 @@ internal class FLNativeView(context: Context, id: Int, creationParams: Map<Strin
         webView.settings.useWideViewPort = true
         webView.settings.javaScriptCanOpenWindowsAutomatically = true
         webView.settings.loadWithOverviewMode = true
-
+        }
 
     }
 
