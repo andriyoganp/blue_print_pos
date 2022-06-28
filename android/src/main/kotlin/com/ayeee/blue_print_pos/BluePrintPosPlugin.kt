@@ -11,7 +11,6 @@ import android.webkit.WebViewClient
 import androidx.annotation.NonNull
 import com.ayeee.blue_print_pos.extension.toBitmap
 import com.ayeee.blue_print_pos.extension.toByteArray
-import com.ayeee.blue_print_pos.kk
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
